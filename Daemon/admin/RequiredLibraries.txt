@@ -1,0 +1,107 @@
+#!/bin/bash
+####
+# Installs the libraries necessary for the Lunabot autonomy system.
+####
+
+# Prerequisites for building the projects
+sudo apt-get install build-essential
+sudo apt-get install pkg-config
+sudo apt-get install cmake
+
+# Prerequisites for OpenCV/POCO
+sudo apt-get install libpng12-0 libpng12-dev libpng++-dev libpng3
+sudo apt-get install libpnglite-dev libpngwriter0-dev libpngwriter0c2
+sudo apt-get install zlib1g-dbg zlib1g zlib1g-dev
+sudo apt-get install libjasper-dev libjasper-runtime libjasper1
+sudo apt-get install pngtools libtiff4-dev libtiff4 libtiffxx0c2 libtiff-tools
+sudo apt-get install libjpeg8 libjpeg8-dev libjpeg8-dbg libjpeg-prog
+sudo apt-get install ffmpeg libavcodec-dev libavcodec52 libavformat52 libavformat-dev
+sudo apt-get install libgstreamer0.10-0-dbg libgstreamer0.10-0  libgstreamer0.10-dev
+sudo apt-get install libxine1-ffmpeg  libxine-dev libxine1-bin
+sudo apt-get install libunicap2 libunicap2-dev
+sudo apt-get install libdc1394-22-dev libdc1394-22 libdc1394-utils
+sudo apt-get install swig
+sudo apt-get install libv4l-0 libv4l-dev
+sudo apt-get install python-numpy
+
+# Phidgets prerequisites
+sudo apt-get install libusb-dev
+
+# Phidgets library
+# See http://www.phidgets.com/ to update link if it goes down
+# `wget http://www.phidgets.com/downloads/libraries/libphidget.tar.gz -O libphidget.tar.gz`
+# `tar xzvf libphidget.tar.gz`
+# `cd [THE NEW PHIDGET DIRECTORY]`
+# `./configure`
+# `make`
+# `sudo make install`
+# `cd ..`
+# `rm -R [THE PHIDGET DIRECTORY YOU WERE JUST IN]`
+# `rm libphidget.tar.gz`
+
+# Lidar prerequisites
+sudo apt-get install unzip
+
+# Lidar URG Helper
+# See http://sourceforge.net/projects/urgwidget/ to update if link goes down
+# `wget http://downloads.sourceforge.net/project/urgwidget/urg/1.0.4/urg_library-1.0.4.zip -O urg_library.zip`
+# `unzip urg_library.zip`
+# `cd [THE NEW LIDARY DIRECTORY]`
+# `make`
+# `sudo make install`
+# `cd ..`
+# `rm -R [THE LIDAR DIRECTORY YOU WERE JUST IN]`
+# `rm urg_library.zip`
+
+# Boost C++ Libraries
+sudo apt-get install libboost-all-dev
+
+# OpenCV
+# See http://opencv.org/ to update
+# `wget http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.8/opencv-2.4.8.zip -O opencv.zip`
+# `unzip opencv.zip`
+# `cd [THE NEW OPENCV DIRECTORY]`
+# `mkdir build`
+# `cd build`
+# `cmake ..`
+# `make`
+# `sudo make install`
+# `cd ../..`
+# `rm -R [THE OPENCV DIRECTORY YOU WERE JUST IN]`
+# `rm opencv.zip`
+
+# PCL prerequisites
+sudo apt-get install libeigen3-dev libflann-dev
+
+# PCL Library
+# See http://pointclouds.org/downloads/ for update if link goes down
+# `wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.1.tar.gz -O libpcl.tar.gz`
+# `tar zvxf libpcl.tar.gz`
+# `cd [THE NEW PCL DIRECTORY]
+# `mkdir build`
+# `cd build`
+# `cmake -DCMAKE_BUILD_TYPE=Release ..`
+# `make`
+# `sudo make install`
+# `cd ../..`
+# `rm -R [THE PCL DIRECTORY YOU WERE JUST IN]`
+# `rm libpcl.tar.gz`
+
+# If you want an SSH server running
+# sudo apt-get install openssh-server
+
+
+
+
+
+
+# Are these still used
+
+# POCO
+# See http://pocoproject.org/ to update
+# wget http://pocoproject.org/releases/poco-1.4.6/poco-1.4.6p1.tar.gz -O poco.tar.gz
+
+# OpenGL and GLUT
+# sudo apt-get install freeglut3-dev libgl-dev libxmu-dev libxi-dev
+
+

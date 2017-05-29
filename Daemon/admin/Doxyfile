@@ -1,0 +1,18 @@
+PROJECT_NAME =	"University of Alabama 2013-2014 Lunabot Autonomy System"
+
+OPTIMIZE_OUTPUT_FOR_C = YES
+
+INPUT = ../lib/ ../src/ ../util/
+FILE_PATTERNS = *.c *.h *.cpp *.hpp *.hh *.cc *.hxx
+EXCLUDE_PATTERNS = */tests/*
+
+RECURSIVE = YES
+
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = NO
+EXTRACT_STATIC = NO
+EXTRACT_LOCAL_CLASSES = NO
+
+OUTPUT_DIRECTORY = ../doc/
+GENERATE_LATEX = YES
+USE_PDFLATEX = YES

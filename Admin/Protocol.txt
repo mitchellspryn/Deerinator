@@ -1,0 +1,140 @@
+==================================================================
+=
+=  DEERENATOR DAEMON COMMAND PROTOCOL
+=
+=  Author: Mitchell Spryn
+=
+=  Summary: This document details the protocol of the TCP/IP
+=             packets that the control daemon will respond to
+=           It also contains information about the limitations on 
+=             the valid arguments and the modules in general.
+=           
+=
+==================================================================
+
+==========BASE FORMAT==========
+Module:component.command=(arg)
+  Module    : High level module for which the instruction is intended
+  Component : Specific component of module for which the instruction is intended
+  Property  : Property to be modified 
+  Arg       : Argument provided to the Daemon. Used for setting properties.
+
+==========COMMAND LIST==========
+Note: <..> represents a variable argument of the data type within the chevrons. For example, 
+  <double> = some double-precision number.
+MODULE: gimble
+  Explanation: The gimble is an abstraction of the pan/tilt method we are using for
+                 the actuation of the accelerator.
+  COMPONENT: pan
+    Explanation: This component represents the abstraction of the device used to actuate the 
+                   the accelerator in the plane parallel to the bottom of the device. 
+    PROPERTY: isAttached
+      Explanation: This command returns the current state of the pan actuation device. The argument is ignored.
+                   The responses to the command will be the following:
+                       "OK"    - the pan actuation device is currently functional and ready to recieve commands
+                       "ERROR" - the pan actuation device is not currently functional.
+      SAMPLE: gimble:pan.isAttached=() #gets whether the pan actuation device is attached
+    PROPERTY: setDeg
+      Explanation: This command sets the pan actuation device to the number specified in the arguments. 
+                   The range of the argument is between 0 and 180 degrees. 
+                   The response to this command will be the following:
+                    "OK"    - the pan actuation device was successfully actuated
+                    "OOR"   - the pan actuation device was moved to state outside of its valid range. The actuation device will not move from its previous position.
+                    "BADARG" - the argument was unrecognized. No change in state will happen.
+                    "ERROR" - an internal error occured. It is unknown whether the actuation device is in its correct state.
+      SAMPLE: gimble:pan.setDeg=(45)    #sets the pan actuation device to a 45 degree position
+    PROPERTY: stepDeg
+      Explanation: This command adds the number of degrees specified in the argument field to the current position of the 
+                     pan actuation device. The argument may be negative. 
+                   The response to the command will be the following:
+                     "OK"    - the pan actuation device was successfully actuated
+                     "OOR"   - the pan actuation device was moved to state outside of its valid range. The actuation device will not move from its previous position.
+                     "BADARG" - the argument was unrecognized. No change in state will happen.
+                     "ERROR" - an internal error occured. It is unknown whether the actuation device is in its correct state.
+      SAMPLE: gimble:pan.stepDeg=(1)    #moves the actuation device 1 degree from its previous position
+    PROPERTY: getDeg
+      Explanation: This command gets the current position of the pan actuation device. The argument is ignored. 
+                     The response to the command may be the following:
+                       "Pos=<double>" - A number representing the state of the actuation device. 
+                       "ERROR"        - an internal error occured. 
+      SAMPLE: gimble:pan.getDeg=()  #gets the current position of the pan actuation device
+
+  COMPONENT: tilt
+    Explanation: This component represents the abstraction of the device used to actuate the 
+                  the accelerator in the plane parallel to the direction of the accelerator's barrel. 
+    PROPERTY: isAttached
+      Explanation: This command returns the current state of the tilt actuation device. The argument is ignored.
+                   The responses to the command will be the following:
+                     "OK"    - the tilt actuation device is currently functional and ready to recieve commands
+                     "ERROR" - the tilt actuation device is not currently functional.
+      SAMPLE: gimble:tilt.isAttached=() #gets whether the tilt actuation device is attached
+    PROPERTY: setDeg
+      Explanation: This command sets the tilt actuation device to the number specified in the arguments. 
+                 The range of the argument is between 0 and 180 degrees. 
+                 The response to this command will be the following:
+                  "OK"    - the actuation device was successfully actuated
+                  "OOR"   - the actuation device was moved to state outside of its valid range. The actuation device will not move from its previous position.
+                  "BADARG" - the argument was unrecognized. No change in state will happen.
+                  "ERROR" - an internal error occured. It is unknown whether the actuation device is in its correct state.
+      SAMPLE: gimble:tilt.setDeg(45)    #sets the tilt actuation device to a 45 degree position
+    PROPERTY: stepDeg
+      Explanation: This command adds the number of degrees specified in the argument field to the current position of the 
+                   tilt actuation device. The argument may be negative. 
+                 The response to the command will be the following:
+                   "OK"     - the actuation device was successfully actuated
+                   "OOR"    - the actuation device was moved to state outside of its valid range. The actuation device will not move from its previous position.
+                   "BADARG" - the argument was unrecognized. No change in state will happen.
+                   "ERROR"  - an internal error occured. It is unknown whether the actuation device is in its correct state.
+      SAMPLE: gimble:tilt.stepDeg(1)    #moves the actuation device 1 degree from its previous position
+    PROPERTY: getDeg
+      Explanation: This command gets the current position of the tilt actuation device. The argument is ignored. 
+                   The response to the command may be the following:
+                     "Pos=<double>" - A number representing the state of the actuation device. 
+                     "ERROR"        - an internal error occured. 
+      SAMPLE: gimble:tilt.getDeg=()  #gets the current position of the tilt actuation device
+
+MODULE: accelerator
+  Explanation: This device represents an abstraction of the accelerator that is used to accelerate projectiles in the direction of the target.
+  COMPONENT: fireCtl
+    Explanation: This component represents the control system for the accelerator.
+      PROPERTY: isAttached
+        Explanation: This command returns the current state of the accelerator. The argument is ignored.
+                       The responses to the command will be the following:
+                         "OK"    - the accelerator is currently functional and ready to recieve commands
+                         "ERROR" - the accelerator is not currently functional.
+        SAMPLE: accelerator:fireCtl.isAttached=()  #Returns whether the acceleator is attached or not
+      PROPERTY: fireReady
+        Explanation: This command identifies whether the accelerator is ready to fire another projectile. The argument is ignored.
+                       The responses to the command will be the following:
+                        "READY" - The accelerator is ready to fire another round.
+                        "WAIT"  - The accelerator is not ready to fire.
+                        "ERROR" - An internal error occured. It is unknown whether a projectile has been fired.
+        SAMPLE: accelerator:fireCtl.fireReady=()   #Identifies whether the accelerator is ready to fire or not
+      PROPERTY: fire
+        Explanation: This command fires the accelerator, if it is ready. The argument is ignored
+                       The responses to the command will be the following:
+                        "DONE"  - A projectile has been fired
+                        "WAIT"  - The accelerator was not ready to be fired. Nothing has been fired. 
+                        "ERROR" - An internal error occured. It is unknown whether a projectile has been fired.
+        SAMPLE: accelerator:fireCtl.fire=()
+      PROPERTY: waitFire
+        Explanation: This command sets or removes the processor in a spinlocked state, firing as soon as the accelerator is ready. 
+                       It is equivalent to the following snippet:
+                        while(fireReady == "WAIT" && arg="TRUE"){;};
+                        fire();
+                     The argument must be one of the following:
+                       "TRUE"  : sets the processor in the spinlocked state
+                       "FALSE" : removes the processor from the spinlocked state
+                     Once the accelerator has been fired, the processor will exit the spinlocked state.
+                     The response to the command will be one of the following:
+                       "SET"      : processor is now set in the spinlocked state
+                       "RELEASE"  : processor has been released from the spinlocked state
+                       "NOCHANGE" : the command does not change the state of the processor, so it was ignored
+                       "BADARG"   : the argument has not been recognized. 
+                       "ERROR"    : an internal error has occured
+        SAMPLE: accelerator:waitFire.fire=("TRUE") #sets the processor into the spinlock state
+
+MODULE: deerTracker
+  Explanation: This device represents an abstraction of the autonomous sensing that will be used to track the deer.
+                 At the moment, there will be no publicly exposed members, as there is no need for the end user to 
+                 need to control this module.

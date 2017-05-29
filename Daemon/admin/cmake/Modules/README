@@ -1,0 +1,3 @@
+CMake Module Files
+
+These custom files make it easier to include libraries through CMake.  To include a library, use the find_package(NAME) function in CMake.

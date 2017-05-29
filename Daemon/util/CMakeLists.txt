@@ -1,0 +1,5 @@
+add_subdirectory("AITest")
+add_subdirectory("accelerator")
+add_subdirectory("server") 
+add_subdirectory("gimble")
+add_subdirectory("controllerTest")

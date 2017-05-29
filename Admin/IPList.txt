@@ -1,0 +1,8 @@
+Access point: 192.168.1.1
+  Subnet: 255.255.255.0
+  DHCP Range: 192.168.1.100 - 192.168.1.120
+
+Static IPs:
+  Daemon: 192.168.1.10
+  Webcam: 192.168.1.11
+  Stream URL: 192.168.11.1:8080/stream.html

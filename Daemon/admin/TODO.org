@@ -1,0 +1,85 @@
+* Autonomy Tasks
+** System
+*** TODO Change router channel and SSID
+*** TODO Keep up with a 10 minute run timer and act based on time left
+*** TODO Stream status over network to autonomy frontend
+*** TODO Define movements to minimize the amount of skid steering turns
+*** TODO Logger << operator does not duplicate output to standard output
+*** TODO Correctly close open resources on ctrl+c
+*** TODO PathFollower should use state machine to skip first steps if the Lunabot is already near the goal
+*** TODO Create states for the Lunabot
+*** TODO Write a GoTo class
+** Docking
+*** TODO Bin coupling implementation using limit switches
+*** TODO Bin coupling implementation without limit switches
+*** TODO Depositing implementation
+** Excavation
+*** TODO Excavation implementation
+** Localization
+*** TODO IMU mounting
+*** TODO 180 degree LIDAR scans or filter robot parts within view
+** Obstacle Detection
+*** DONE Mix delta-angle and delta-distance LIDAR scans during obstacle detection
+    CLOSED: [2014-04-23 Wed 23:31]
+*** TODO Do we need to take multiple scans throughout the obstacle area
+*** TODO 180 degree LIDAR scans or filter robot parts within view
+*** TODO Filter out dust
+** Control
+*** TODO Update the drive commands sent to the backend (angle + M_PI)
+*** TODO Determine max velocity allowed, P-gains
+** Testing
+*** TODO Needs serious testing for robustness, exception handling, stability, anti-crashing
+*** TODO Create test utilities to run during setup time (check hardware is on, working, algorithms working)
+** Coding
+*** DONE Fix PCLTest utility*
+    CLOSED: [2014-04-21 Mon 13:54]
+*** CANCELED Fix DisplayObstacleDetection utility
+    CLOSED: [2014-04-21 Mon 13:49]
+*** CANCELED Fix FilterSmallObstacles utility
+    CLOSED: [2014-04-21 Mon 13:49]
+*** CANCELED Fix SystemDemo5
+    CLOSED: [2014-04-21 Mon 13:49]
+*** DONE DisplayPcdFile only works with 2D scans
+    CLOSED: [2014-04-23 Wed 13:21]
+*** TODO Remove unneeded utilities or move them to tests
+*** TODO Swap ahrs.zeroGyro calls to gimbal.zeroGyro
+*** TODO Swap Geometry library to use Boost and PCL
+*** TODO Populate LunabotDimensions with correct values
+** Keep Utilities?
+*** DONE DisplayLidarScan
+    CLOSED: [2014-04-24 Thu 02:01]
+*** DONE DisplayLidarScanFile
+    CLOSED: [2014-04-24 Thu 02:01]
+*** DONE DisplayPcdFile
+    CLOSED: [2014-04-24 Thu 02:01]
+*** TODO NavigationTest2
+*** TODO ObsDetectWithSetThreshold_2DScanWithScanFile
+*** DONE SaveLidarScan
+    CLOSED: [2014-04-24 Thu 02:01]
+*** TODO TakeSingleLIDARScan_Classify_Show
+*** TODO Actuation
+*** TODO Docking
+*** TODO Geometry
+*** TODO InitialLocalization
+*** TODO Localization
+*** TODO ObstacleDetection
+*** TODO PathPlanning
+*** TODO System
+*** TODO Vision_Localization
+
+* Backend Tasks
+** System
+*** TODO Output a warning to the shell when the battery is low
+*** TODO Set the comm LED on the base when connection is active
+** Base
+*** TODO Implement limit switches for docking
+*** TODO Update the drive control system to back up correctly
+*** TODO The get command returns negative velocities if the wheel is set as reversed
+** Bucket Chain Excavator
+*** TODO Protect actuator from PWM
+*** TODO Weight sensors or current feedback for load estimation
+*** TODO Actuator position control automation
+
+* Frontend Tasks
+** UI
+*** TODO Display base and module statuses (velocity, position, etc...)

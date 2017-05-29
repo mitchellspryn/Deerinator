@@ -1,0 +1,48 @@
+set( UTILITY_NAME "AICameraWrapperTest" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "AICameraWrapperTest.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "arrayStackTest" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "arrayStackTest.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "boxingTest" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "boxingTest.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "singleImage" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "singleImage.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "videoTest_Win" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "videoTest_Win.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "videoTest_KP" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "videoTest_KP.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "USBCamTest" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "USBCamTest.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI")
+
+set( UTILITY_NAME "camera" )
+project( "${UTILITY_NAME}" )
+add_executable( "${UTILITY_NAME}" "camera.cpp" )
+add_dependencies( "${UTILITY_NAME}" "AI" )
+target_link_libraries( "${UTILITY_NAME}" "AI" "v4l2")
+

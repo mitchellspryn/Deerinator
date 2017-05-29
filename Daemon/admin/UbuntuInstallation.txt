@@ -1,0 +1,64 @@
+This file details the installation process of putting Ubuntu 12.04 on the VIA EPIA P800 and P900-100 PICO ITX SBCs.
+Because the PICOs do not come with disc drives, they are built to default to attempt to boot over a network by default.
+You will have to set up a small network and system to provide the necessary net boot configuration for the PICO to successfully
+access the network the install.
+
+You'll need
+- The PICO (SBC)
+- A Linux computer (PC)
+- A router
+- 3 ethernet cables
+
+Setup the network
+- Wire the SBC and PC to the router and the router to the internet.  The PC should be able to access the internet.
+
+Setup the router
+- The router is expected to currently setup in a standard configuration.
+- Make sure the rotuer has a static IP address (make note of it)
+- Disable the DHCP server on the router (the PC will be the DHCP server)
+
+Setup the PC
+- The PC needs to be setup to run a DHCP server (use the same subnet as the static IP the router has)
+--- See http://www.debian-administration.org/articles/478 for possible solutions, I've used the dnsmasq option
+- The PC should be given a static IP address (on the same subnet)
+- The PC should set its default gateway to the router's IP address
+- The PC should set its DNS server to Google's DNS (8.8.8.8)
+
+Setup the netboot installation for Ubuntu.
+- Make sure you have tftpd-hpa to provide a PXE netboot
+--- I've used as a reference http://www.cyberciti.biz/faq/install-configure-tftp-server-ubuntu-debian-howto/
+
+Boot the SBC
+- Turn on the SBC, it should attempt and get an IP address from the PC DHCP server
+- It should should successfully find the PXE netboot image on the PC
+
+Install Ubuntu
+- Start normal installation
+- After you set up the domain name for the board and it configures the network and asks for a country to find packages, wait
+- Push ctrl alt f2 to get to a shell
+- Change the gateway for the SBC
+--- `route -n`
+--- `route del default`
+--- `route add default gw [PUT ROUTER IP HERE]`
+- You should be able to ping the internet now by IP address if teh gateway works
+--- `ping 8.8.8.8`
+- You should be able to ping domain names if the DNS is working on the PC
+--- `ping www.google.com`
+- Continue installation
+--- It may spend a long time (~30min) on a purple screen after checking the us.archive.ubuntu.com
+- Finish installation
+- It will tell you you can reboot
+
+Setup configuration
+- Turn off netboot priority
+--- On boot on BIOS screen, push delete to get to the BIOS menu
+--- Change boot order to prefer HD
+--- Save and quit
+- In BIOS set the APM to Power ON after AC power loss
+--- If you don't the board may not restart on power. If that happens, you will need to short PW_BN- and GND (pins 5 and 6) in CN4 to simulate a power button press
+- It will reboot
+- Log on to Ubuntu
+- Enable root account
+--- `root passwd`
+- Disable GRUB block on boot
+--- http://askubuntu.com/questions/55551/how-can-i-force-ubuntu-to-boot-on-a-stuck-boot-menu
